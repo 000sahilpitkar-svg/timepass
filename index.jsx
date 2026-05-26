@@ -782,7 +782,7 @@ const globalStyles = `
     text-transform: uppercase;
   }
   .form-input, .form-select, .form-textarea {
-    background: rgba(201,168,76,0.03);
+    background: rgba(201,168,76,0.03)
     border: 1px solid rgba(201,168,76,0.15);
     padding: 1rem 1.2rem;
     color: var(--ivory);
@@ -1194,7 +1194,6 @@ function AmbientParticles() {
     animate();
     return () => cancelAnimationFrame(raf);
   }, []);
-
   return <canvas ref={canvasRef} className="particles-canvas" style={{ width: "100%", height: "100%" }} />;
 }
 
@@ -1742,4 +1741,4 @@ export default function LuminaryApp() {
       </footer>
     </div>
   );
-}
+                    
