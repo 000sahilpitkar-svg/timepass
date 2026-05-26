@@ -3,16 +3,54 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3D Scene</title>
+    <title>3D Scene Diagnostic</title>
     
+    <style>
+      /* If this HTML file is active, your screen WILL turn dark slate blue */
+      body {
+        background-color: #1e293b !important; 
+        color: white !important;
+        margin: 0;
+        padding: 20px;
+        font-family: sans-serif;
+      }
+      #error-display {
+        background: #ef4444;
+        color: white;
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        display: none;
+        word-break: break-all;
+      }
+    </style>
+
     <script>
-      window.onerror = function(message, source, lineno, colno, error) {
-        alert("CRASH LOG:\n" + message + "\nLine: " + lineno);
+      function logErrorToScreen(type, message) {
+        window.addEventListener('DOMContentLoaded', () => {
+          const box = document.getElementById('error-display');
+          if (box) {
+            box.style.display = 'block';
+            box.innerHTML += `<div><strong>[${type}]</strong> ${message}</div>`;
+          }
+        });
+        alert(`[${type}] ${message}`);
+      }
+
+      // 1. Catch standard JavaScript bugs
+      window.onerror = function(message, source, lineno) {
+        logErrorToScreen("JS Error", message + " (Line " + lineno + ")");
         return false;
       };
+
+      // 2. Catch async/promise loading bugs (3D assets/Suspense failures)
+      window.addEventListener('unhandledrejection', function(event) {
+        logErrorToScreen("Async Promise Error", event.reason);
+      });
     </script>
   </head>
   <body>
+    <div id="error-display"></div>
     <div id="root"></div>
     <script type="module" src="/index.jsx"></script>
   </body>
