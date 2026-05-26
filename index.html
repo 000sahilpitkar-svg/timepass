@@ -3,11 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Timepass App</title>
+    <title>3D Scene</title>
+    
+    <script>
+      window.onerror = function(message, source, lineno, colno, error) {
+        alert("CRASH LOG:\n" + message + "\nLine: " + lineno);
+        return false;
+      };
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/index.jsx"></script>
   </body>
 </html>
-
